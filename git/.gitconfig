@@ -1,0 +1,69 @@
+[init]
+	defaultBranch = main
+[user]
+	name = Hieu Cao
+	email = hieu.cao@enotion.io
+[core]
+	ignorecase = false
+	editor = code --wait
+	excludesfile = /Users/user/.gitignore_global
+	autocrlf = true
+[alias]
+	adog = log --all --decorate --oneline --graph
+	rank = shortlog -sn --no-merges
+	last = log -1 HEAD --stat
+	co = checkout
+	st = status
+	br = branch
+	cm = commit -m
+	rv = remote -v
+	new = co -b
+	del = br -D
+	subclone = submodule update --init
+	subeach = submodule foreach
+	subco = subeach git co
+	subpull = subeach git pull -p
+	forcebr = "!f() { git br -f $1 HEAD; }; f"
+	squash = "!f() { git rebase -i HEAD~$1; }; f"
+	ours = "!f() { git co --ours $@ && git add $@; }; f"
+	theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+	undo = reset --soft HEAD^
+	back = reset --hard HEAD^
+	slist = stash list
+	ssave = stash save
+	sapply = stash apply
+	spop = stash pop
+	sdrop = stash drop
+	sclear = stash clear
+
+[mergetool]
+	prompt = true
+	keepBackup = false
+    keepTemporaries = false
+[difftool]
+	prompt = true
+
+[merge]
+	tool = vscode
+[diff]
+	tool = vscode
+
+[mergetool "vscode"]
+	cmd = code --wait --merge $LOCAL $REMOTE $BASE $MERGED
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+
+[http]
+	postBuffer = 524288000
+[commit]
+	template = /Users/user/.stCommitMsg
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[push]
+	autoSetupRemote = true
+
+[credential]
+	helper = /usr/local/share/gcm-core/git-credential-manager
